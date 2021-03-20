@@ -9,10 +9,10 @@ class ProviderLogin(forms.Form):
     address = forms.CharField(label="Provider Address")
 
 
-class AppointmentInfo(form.Form):
+class AppointmentInfo(forms.Form):
     date = forms.DateField(label="Appointment Date")
     time = forms.TimeField(label="Appointment Time")
-    type = form.CharField(label="Vaccine Type")
+    type = forms.CharField(label="Vaccine Type")
 
 
 def providerForm(request):
@@ -50,7 +50,7 @@ def providerDashboard(request):
             return HttpResponseRedirect(reverse("submitted"))
 
 
-    return render(request,"providerDashboard.html",{"providername" : (name), "form":AppointmentInfo})
+    return render(request,"providerDashboard.html",{"providername" :name, "form":AppointmentInfo})
 
 
 def submitted(request):
