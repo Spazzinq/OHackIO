@@ -1,20 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link type="text/css" rel="stylesheet" href="style.css" />
+    <style>
+        :root {
+            --nav-color: #33322e;
+            --background-color: #ffefb0;
+            --main-color: #ffefb0;
+            --highlight-color: #ffcb00;
+            --scroll-color: #ebeb15;
+            --error-color: #ff1d00;
+            --shadow-color: black;
+        }
+
+        html {
+            font: 100%/1.5 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            /* Remove default user agent margins */
+            margin: 0;
+        }
+
+        header {
+            background-color: var(--background-color);
+            color: rgba(0, 0, 0, 0.5);
+            display: grid;
+            grid-template-columns: 1fr 5fr 1fr;
+        }
+
+        footer {
+            background-color: var(--main-color);
+            text-align: center;
+            padding: .5em;
+        }
+    </style>
     <title>Provider Dashboard</title>
-  </head>
-  <body>
+</head>
 
-    <h1> Hello {{ providername }} Welcome to your dashboard </h1>
+<body>
+    <header></header>
+    <div style="margin:auto;width: 50%;">
+        <h1>Welcome, {{ providername }}.</h1>
 
-    <h3> To add a open appointment slot </h3>
+        <h3>Add an open appointment slot</h3>
 
-    <form action="{% url 'providerDashboard' %}" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit">
-
-
-  </body>
-</html>
+        <form action="{% url 'providerDashboard' %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <br /><br />
+            <input type="submit">
+        </form>
+    </div>
+</body></html>
