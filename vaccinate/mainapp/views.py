@@ -15,9 +15,15 @@ def providerForm(request):
         if form.is_valid():
             provider_name = form.cleaned_data['name']
             provider_address = form.cleaned_data['address']
+
+            request.session['provider_name'] = provider_name
+            request.session['provider_address'] = provider_address
+
             return HttpResponseRedirect(reverse("formresult"))
 
     return render(request,"formtesting.html",{"form":ProviderLogin})
 
 def formresult(request):
-    return render(request,"formresulttest.html", {"test":("first:" + " " + "second")})
+    name = request.session['provider_name']
+    address = request.session['provider_address']
+    return render(request,"formresulttest.html", {"test":(name + " " + address)})
