@@ -11,7 +11,7 @@ class ProviderLogin(forms.Form):
 
 def providerForm(request):
     if request.method == "POST":
-        form = RegistrationForm(request.POST)
+        form = ProviderLogin(request.POST)
         if form.is_valid():
             provider_name = form.cleaned_data['name']
             provider_address = form.cleaned_data['address']
