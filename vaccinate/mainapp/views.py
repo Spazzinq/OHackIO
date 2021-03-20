@@ -43,7 +43,7 @@ def providerDashboard(request):
         if form.is_valid():
             appDate = form.cleaned_data['date']
             appTime = form.cleaned_data['time']
-            appType = form.cleaned-data['type']
+            appType = form.cleaned_data['type']
 
             DataTime = str(appDate) + " " + str(appTime)
             #put this data into database
