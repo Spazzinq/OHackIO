@@ -6,5 +6,6 @@ urlpatterns = [
     path('providerForm/',views.providerForm,name="providerForm"),
     path('formresponse/',views.formresult,name="formresult"),
     path('providerDashboard/',views.providerDashboard,name="providerDashboard"),
-    path('submitted/',views.submitted,name="submitted")
+    path('submitted/',views.submitted,name="submitted"),
+    path('map/',views.getData, name="getData")
 ]

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>IDK</title>
+</head>
+
+<body>
+    <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1LRQ8ZjAU_F299VjgKI1HspdZXepIL4ZK" width="640" height="480"></iframe>
+
+
+    <!-- change php to something useful maybe -->
+    <form action="{% url 'getData' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit">
+  </form>
+    {{ table }}
+</body>
+
+</html>
