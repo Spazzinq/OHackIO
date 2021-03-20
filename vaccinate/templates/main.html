@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Vaccine Map</title>
-  </head>
-  <body>
+    <style>
+        html {
+            font: 100%/1.5 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
 
-    <h1> This is the main page </h1>
-    <a href="{% url 'providerForm' %}"> if you are a provider </a>
+        body {
+            /* Remove default user agent margins */
+            margin: 0;
+        }
+    </style>
+    <title>Main Page</title>
+</head>
 
-
-  </body>
-</html>
+<body>
+    <div style="margin:auto;width: 50%;">
+        <h1>Main Page </h1>
+        <a href="{% url 'providerForm' %}"> if you are a provider </a>
+    </div>
+</body></html>
