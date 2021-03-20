@@ -9,6 +9,12 @@ class ProviderLogin(forms.Form):
     address = forms.CharField(label="Provider Address")
 
 
+class AppointmentInfo(form.Form):
+    date = forms.DateField(label="Appointment Date")
+    time = forms.TimeField(label="Appointment Time")
+    type = form.CharField(label="Vaccine Type")
+
+
 def providerForm(request):
     if request.method == "POST":
         form = ProviderLogin(request.POST)
@@ -19,7 +25,7 @@ def providerForm(request):
             request.session['provider_name'] = provider_name
             request.session['provider_address'] = provider_address
 
-            return HttpResponseRedirect(reverse("formresult"))
+            return HttpResponseRedirect(reverse("providerDashboard"))
 
     return render(request,"formtesting.html",{"form":ProviderLogin})
 
@@ -27,3 +33,25 @@ def formresult(request):
     name = request.session['provider_name']
     address = request.session['provider_address']
     return render(request,"formresulttest.html", {"test":(name + " " + address)})
+
+def providerDashboard(request):
+    name = request.session['provider_name']
+    address = request.session['provider_address']
+
+    if request.method == "POST":
+        form = AppointmentInfo(request.POST)
+        if form.is_valid():
+            appDate = form.cleaned_data['date']
+            appTime = form.cleaned_data['time']
+            appType = form.cleaned-data['type']
+
+            DataTime = str(appDate) + " " + str(appTime)
+            #put this data into database
+            return HttpResponseRedirect(reverse("submitted"))
+
+
+    return render(request,"providerDashboard.html",{"providername" : (name), "form":AppointmentInfo})
+
+
+def submitted(request):
+    return render(request,"sumbitted.html")

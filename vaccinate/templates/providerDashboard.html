@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Provider Dashboard</title>
+  </head>
+  <body>
+
+    <h1> Hello {{ providername }} Welcome to your dashboard </h1>
+
+    <h3> To add a open appointment slot </h3>
+
+    {% csrf_token %}
+    {{ form }}
+
+
+  </body>
+</html>
