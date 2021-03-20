@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.shortcuts import render
 from django import forms
 from firebase import firebase
+import bs4
 
 db = firebase.FirebaseApplication("https://vaccinate-a2930-default-rtdb.firebaseio.com/", None)
 
@@ -24,8 +25,42 @@ def providerForm(request):
 def formresult(request):
     return render(request,"formresulttest.html", {"test":(provider_name + " " + provider_address)})
 
-def getData(request):
-    # fullDb = db.get()
-    # address = request.POST.get('Address')
+def addAddresses(request):
+    with open("templates/map.html") as map:
+        txt = map.read()
+        txt = bs4.BeautifulSoup(txt)
 
-    return render(request, "map.html", {"address": ("LOL")})
+    fullDb = db.get('', None).values()
+    locations = []
+    for name in fullDb:
+        for address in name:
+            locationValue = txt.new_tag("option", address, value=address)
+            locations.append(locationValue)
+    for location in locations:
+        txt.head.append(location)
+
+    with open("templates/map.html", "w") as map:
+        map.write(str(txt))
+
+    return render(request, "map.html")
+
+def getData(request):
+    fullDb = db.get('', None).values()
+    test = []
+    address = request.POST.get("address")
+    print(address)
+    for name in fullDb:
+        for addressName in name.keys():
+            if addressName == address:
+                for addressDict in name.values:
+                    print(addressDict)
+                    for appointment in addressDict:
+                        if(appointment.find("L") == -1):
+                            test.append(appointment)
+                        
+
+    table = ""
+    for time in test:
+        table = table + time + "\n"
+    print(table)
+    return render(request, "map.html", {"table": table})
