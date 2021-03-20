@@ -2,7 +2,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import render
 from django import forms
+from firebase import firebase
 
+db = firebase.FirebaseApplication("https://vaccinate-a2930-default-rtdb.firebaseio.com/", None)
 
 class ProviderLogin(forms.Form):
     name = forms.CharField(label="Provider Name")
@@ -15,9 +17,15 @@ def providerForm(request):
         if form.is_valid():
             provider_name = form.cleaned_data['name']
             provider_address = form.cleaned_data['address']
-            return HttpResoibsedRedurst(reverse("formresult"))
+            return HttpResponseRedirect(reverse("formresult"))
 
     return render(request,"formtesting.html",{"form":ProviderLogin})
 
 def formresult(request):
     return render(request,"formresulttest.html", {"test":(provider_name + " " + provider_address)})
+
+def getData(request):
+    # fullDb = db.get()
+    # address = request.POST.get('Address')
+
+    return render(request, "map.html", {"address": ("LOL")})
