@@ -54,4 +54,4 @@ def providerDashboard(request):
 
 
 def submitted(request):
-    return render(request,"sumbitted.html")
+    return render(request,"submitted.html")
