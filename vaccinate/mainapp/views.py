@@ -71,4 +71,4 @@ def getData(request):
     for time in test:
         table = table + time + "\n"
     print(table)
-    return render(request, "map.html", {"form":locationForm,"table":table)
+    return render(request, "map.html", {"form":locationForm,"table":table})
