@@ -12,6 +12,10 @@ class ProviderLogin(forms.Form):
     address = forms.CharField(label="Provider Address")
 
 
+locationsList = [("value","name"),("value","name"),("value","name")]
+class locationForm(forms.Form):
+	location = forms.ChoiceField(choices = locationsList)
+
 def providerForm(request):
     if request.method == "POST":
         form = ProviderLogin(request.POST)
@@ -47,20 +51,24 @@ def addAddresses(request):
 def getData(request):
     fullDb = db.get('', None).values()
     test = []
-    address = request.POST.get("address")
-    print(address)
-    for name in fullDb:
-        for addressName in name.keys():
-            if addressName == address:
-                for addressDict in name.values:
-                    print(addressDict)
-                    for appointment in addressDict:
-                        if(appointment.find("L") == -1):
-                            test.append(appointment)
-                        
+
+    if request.method == "POST":
+        form = locationForm(request.POST)
+        if form.is_valid():
+            address = form.cleaned_data['location']
+
+            for name in fullDb:
+                for addressName in name.keys():
+                    if addressName == address:
+                        for addressDict in name.values:
+                            print(addressDict)
+                            for appointment in addressDict:
+                                if(appointment.find("L") == -1):
+                                    test.append(appointment)
+
 
     table = ""
     for time in test:
         table = table + time + "\n"
     print(table)
-    return render(request, "map.html", {"table": table})
+    return render(request, "map.html", {"form":locationForm,"table":table)

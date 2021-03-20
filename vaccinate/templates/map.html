@@ -10,17 +10,11 @@
 
 
     <!-- change php to something useful maybe -->
-    <form action="" method="post">
-        <label for="address">Choose a location:</label>
-        <select name="address" id="address">
-            <option value="1216 Tessier Dr">1216 Tessier Dr</option>
-            <option value="VALUE">VALUE</option>
-            <option value="VALUE">VALUE</option>
-            <option value="VALUE">VALUE</option>
-        </select>
-        <br><br>
-        <input type="submit" value="Submit" name="address">
-    </form>
+    <form action="{% url 'getData' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit">
+  </form>
     {{ table }}
 </body>
 
